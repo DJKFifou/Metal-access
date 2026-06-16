@@ -38,6 +38,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
+          path: |
+            build
+            package.json
+            package-lock.json
+          retention-days: 1
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -49,7 +54,13 @@ jobs:
           sudo apt update
           sudo apt install rsync -y
       - name: Deploy to VPS
-        run: rsync -avz ./ ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:${{ secrets.DEPLOY_PATH }}/build
+        run: |
+          rsync -avz ./ ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:${{ secrets.DEPLOY_PATH }}/build
+          rsync -avz package.json package-lock.json ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:${{ secrets.DEPLOY_PATH }}/
+      - name: Install production dependencies
+        run: |
+          ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} \
+            "cd ${{ secrets.DEPLOY_PATH }} && npm ci --omit=dev"
       - name: Restart service
         run: |
           ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} \
