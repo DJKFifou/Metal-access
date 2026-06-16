@@ -14,14 +14,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22.13.0'
-      - name: Check versions
-        run: node --version && npm --version
       - name: Install dependencies
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Check build output
-        run: ls -la
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          DATABASE_ID: ${{ secrets.DATABASE_ID }}
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
