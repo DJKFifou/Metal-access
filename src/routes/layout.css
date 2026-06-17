@@ -1,1 +1,85 @@
 @import 'tailwindcss';
+
+@font-face {
+	font-family: 'Fallback';
+	src: local(Arial);
+	size-adjust: 108%;
+	ascent-override: 96%;
+	descent-override: normal;
+	line-gap-override: 9%;
+}
+
+@font-face {
+	font-family: 'Luciole';
+	src: url('/fonts/Luciole/Luciole-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Luciole';
+	src: url('/fonts/Luciole/Luciole-Regular-Italic.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Luciole';
+	src: url('/fonts/Luciole/Luciole-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Luciole';
+	src: url('/fonts/Luciole/Luciole-Bold-Italic.ttf') format('truetype');
+	font-weight: 700;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Fledora';
+	src: url('/fonts/Fledora-Dirtyn/fledora-dirtyn.regular.otf') format('opentype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@theme {
+	--font-sans: 'Luciole', 'Fallback', sans-serif;
+	--font-fledora: 'Fledora', 'Fallback', sans-serif;
+	--color-theme-white: #f5f5f5;
+	--color-theme-offWhite: #f5f5f5;
+	--color-theme-lightGrey: #d9d9d9;
+	--color-theme-grey: #b3b3b3;
+	--color-theme-darkGrey: #929292;
+	--color-theme-lightBlack: #2c2c2c;
+	--color-theme-black: #0a0b0d;
+	--color-theme-orange: #ff613e;
+	--color-theme-lightOrange: #ffa08b;
+	--text-6\.5xl: 4rem;
+	--shadow-t-sm: 0px 2px 6px var(--color-theme-lightGrey);
+}
+
+h1 {
+	font-family: Fledora, Fallback, sans-serif;
+	font-size: 2.5rem;
+	line-height: 80%;
+}
+
+h2 {
+	font-family: Luciole, Fallback, sans-serif;
+	font-size: 1.75rem;
+	line-height: 80%;
+}
+
+h3 {
+	font-family: var(--font-fledora);
+	font-size: 1.25rem;
+	line-height: 80%;
+}
+
+h4 {
+	font-family: var(--font-fledora);
+	font-size: 1rem;
+	line-height: 80%;
+}
