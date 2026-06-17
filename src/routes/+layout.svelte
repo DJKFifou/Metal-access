@@ -5,7 +5,6 @@
 	import menu from '$lib/assets/menu.svg';
 
 	let { data, children } = $props();
-	console.log('data:', data);
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
