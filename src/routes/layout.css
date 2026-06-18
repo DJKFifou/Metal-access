@@ -49,31 +49,17 @@
 	--font-fledora: 'Fledora', 'Fallback', sans-serif;
 	--color-theme-white: #eaf8ff;
 	--color-theme-black: #171717;
+	--color-theme-blue: #00bfff;
 	--color-theme-orange: #ff613e;
 	--color-theme-lightOrange: #ffa08b;
+	--text-2\.5xl: 1.75rem;
+	--text-3\.5xl: 2rem;
 	--text-6\.5xl: 4rem;
 }
 
-h1 {
-	font-family: var(--font-fledora);
-	font-size: 2.5rem;
-	line-height: 80%;
-}
-
-h2 {
-	font-family: var(--font-fledora);
-	font-size: 1.75rem;
-	line-height: 80%;
-}
-
-h3 {
-	font-family: var(--font-fledora);
-	font-size: 1.25rem;
-	line-height: 80%;
-}
-
+h1,
+h2,
+h3,
 h4 {
 	font-family: var(--font-fledora);
-	font-size: 1rem;
-	line-height: 80%;
 }

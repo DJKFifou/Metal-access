@@ -1,8 +1,11 @@
-<section
-	class="h-lvh w-full flex items-end bg-cover bg-center px-18.75 py-20"
-	style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/hero.png');"
->
-	<h1 class="relative font-fledora text-theme-white text-6.5xl! max-w-2/3">
-		Lorem ipsum dolor sit amet consectetur.
-	</h1>
-</section>
+<script>
+	import Hero from '$lib/components/Homepage/Hero.svelte';
+	import ChiffresCles from '$lib/components/Homepage/ChiffresCles.svelte';
+	import BonnesPratiques from '$lib/components/Homepage/BonnesPratiques.svelte';
+</script>
+
+<!-- <div class="bg-[url('/bg-home.png')] bg-cover bg-center h-full w-full"> -->
+<Hero />
+<ChiffresCles />
+<BonnesPratiques />
+<!-- </div> -->
