@@ -1,4 +1,4 @@
-<section class="px-16 flex flex-col gap-10 py-16">
+<section class="px-16 flex flex-col gap-10 py-48">
 	<h2 class="text-7xl leading-none text-theme-white">
 		<span class="text-theme-blue"> Qu'est-ce que l'accessibilité </span>
 		<br />

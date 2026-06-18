@@ -48,12 +48,16 @@
 	--font-sans: 'Luciole', 'Fallback', sans-serif;
 	--font-fledora: 'Fledora', 'Fallback', sans-serif;
 	--color-theme-white: #eaf8ff;
+	--color-theme-grey: #3b3b3b;
+	--color-theme-darkGrey: #252525;
 	--color-theme-black: #171717;
 	--color-theme-blue: #00bfff;
+	--color-theme-darkBlue: #004c66;
 	--color-theme-orange: #ff613e;
 	--color-theme-lightOrange: #ffa08b;
 	--text-2\.5xl: 1.75rem;
 	--text-3\.5xl: 2rem;
+	--text-4\.5xl: 2.5rem;
 	--text-6\.5xl: 4rem;
 }
 

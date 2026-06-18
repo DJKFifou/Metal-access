@@ -10,11 +10,11 @@
 
 <svelte:window onscroll={handleScroll} />
 
-<header class="fixed w-full z-50 bg-theme-black/50">
+<header class="fixed w-full z-50 bg-linear-to-b from-theme-black/75 to-theme-black/0">
 	<div class=" flex items-center justify-between px-16 py-4 font-fledora uppercase">
 		<a href="/" class="flex items-center gap-4">
 			<img src={oeilBlanc} alt="Logo" class="inset-0 w-11.5 h-11.5 min-h-0 object-contain" />
-			<span class="uppercase text-theme-white text-3.5xl leading-[92%]">Armes <br /> égales</span>
+			<span class="uppercase text-theme-white text-3.5xl leading-[92%]">Metal <br /> access</span>
 		</a>
 		<nav
 			class="flex gap-6 items-center text-theme-white *:leading-[80%] *:hover:text-theme-blue *:transition-all *:duration-300"

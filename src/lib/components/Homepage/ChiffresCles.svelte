@@ -1,4 +1,4 @@
-<section class="flex flex-col items-center justify-center gap-16 px-16 py-24">
+<section class="flex flex-col items-center justify-center gap-16 px-16 py-48">
 	<div class="flex justify-between">
 		<h2 class="text-theme-white text-7xl leading-none flex-2">
 			Un <span class="text-theme-blue">festival accessible</span>, <br /> par où on commence ?
