@@ -26,8 +26,8 @@
 	</p>
 	<a
 		href="/mon-festival"
-		class="bg-[url('/src/lib/assets/button-festival.svg')] w-65 h-12.5 bg-no-repeat bg-center bg-contain z-1"
+		class="bg-[url('/src/lib/assets/button-accessibilite-home.svg')] w-115 h-20 bg-no-repeat bg-center bg-contain z-1"
 	>
-		<span class="sr-only">Évaluer mon festival</span>
+		<span class="sr-only">Découvrir mon niveau d'accessibilité</span>
 	</a>
 </section>

@@ -1,5 +1,6 @@
 <script>
 	import AsideRessource from '$lib/components/AsideRessource.svelte';
+	import downloadIcon from '$lib/assets/download.svg';
 
 	const tags = ['Backstage & staff', 'Festivaliers', 'Artistes', 'Bénévoles', 'Production'];
 
@@ -17,20 +18,8 @@
 				description:
 					'Des installations de douche accessibles permettent aux festivaliers en situation de handicap de profiter pleinement des événements multi-jours.',
 				utilisation: [
-					{
-						name: 'Artistes',
-						image: {
-							url: '/ressources/artistes.png',
-							alt: 'Artistes'
-						}
-					},
-					{
-						name: 'Artistes',
-						image: {
-							url: '/ressources/artistes.png',
-							alt: 'Artistes'
-						}
-					}
+					{ name: 'Artistes', image: { url: '/ressources/artistes.png', alt: 'Artistes' } },
+					{ name: 'Artistes', image: { url: '/ressources/artistes.png', alt: 'Artistes' } }
 				],
 				informations: [
 					{
@@ -69,20 +58,8 @@
 				description:
 					'Des installations de douche accessibles permettent aux festivaliers en situation de handicap de profiter pleinement des événements multi-jours.',
 				utilisation: [
-					{
-						name: 'Artistes',
-						image: {
-							url: '/ressources/artistes.png',
-							alt: 'Artistes'
-						}
-					},
-					{
-						name: 'Artistes',
-						image: {
-							url: '/ressources/artistes.png',
-							alt: 'Artistes'
-						}
-					}
+					{ name: 'Artistes', image: { url: '/ressources/artistes.png', alt: 'Artistes' } },
+					{ name: 'Artistes', image: { url: '/ressources/artistes.png', alt: 'Artistes' } }
 				],
 				informations: [
 					{
@@ -121,20 +98,8 @@
 				description:
 					'Des installations de douche accessibles permettent aux festivaliers en situation de handicap de profiter pleinement des événements multi-jours.',
 				utilisation: [
-					{
-						name: 'Artistes',
-						image: {
-							url: '/ressources/artistes.png',
-							alt: 'Artistes'
-						}
-					},
-					{
-						name: 'Artistes',
-						image: {
-							url: '/ressources/artistes.png',
-							alt: 'Artistes'
-						}
-					}
+					{ name: 'Artistes', image: { url: '/ressources/artistes.png', alt: 'Artistes' } },
+					{ name: 'Artistes', image: { url: '/ressources/artistes.png', alt: 'Artistes' } }
 				],
 				informations: [
 					{
@@ -162,6 +127,7 @@
 		}
 	];
 
+	let selectedRessources = $state([]);
 	let selectedFilter = $state('all');
 	let selectedColor = $state('#eaf8ff');
 	let ressourcesWithSvg = $state([]);
@@ -193,34 +159,88 @@
 	$effect(() => {
 		updateSvgs();
 	});
+
 	let selectedRessource = $state(null);
 
 	function closeAside() {
 		selectedRessource = null;
 	}
+
+	function isSelected(ressource) {
+		return selectedRessources.some((r) => r.id === ressource.id);
+	}
+
+	function toggleSelection(ressource) {
+		if (isSelected(ressource)) {
+			selectedRessources = selectedRessources.filter((r) => r.id !== ressource.id);
+		} else {
+			selectedRessources = [...selectedRessources, ressource];
+		}
+	}
+
+	function slugify(text) {
+		return text
+			.toLowerCase()
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.replace(/[^a-z0-9]+/g, '-')
+			.replace(/(^-|-$)/g, '');
+	}
+
+	async function downloadSelected() {
+		if (selectedRessources.length === 0) return;
+
+		for (const ressource of selectedRessources) {
+			const svgUrl = ressource.computedSvgUrl ?? ressource.image.url;
+			const link = document.createElement('a');
+			link.href = svgUrl;
+			link.download = `${slugify(ressource.title)}.svg`;
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			await new Promise((resolve) => setTimeout(resolve, 150));
+		}
+	}
 </script>
 
 {#snippet Ressource(ressource)}
-	<button
-		onclick={() => (selectedRessource = ressource)}
-		class="border border-theme-lightGrey rounded-xl px-2 pt-2 pb-4 flex flex-col items-center gap-4 shadow-card-ressource h-fit cursor-pointer"
+	<div
+		class="group relative border border-theme-lightGrey rounded-xl px-2 pt-2 pb-4 flex flex-col items-center gap-4 shadow-card-ressource h-fit"
 	>
-		<img
-			src={ressource.computedSvgUrl ?? ressource.image.url}
-			alt={ressource.image.alt}
-			class="w-full h-37 object-contain rounded-lg"
+		<input
+			type="checkbox"
+			name="select_ressource"
+			id="select_ressource_{ressource.id}"
+			checked={isSelected(ressource)}
+			onclick={(e) => {
+				e.stopPropagation();
+				toggleSelection(ressource);
+			}}
+			class="absolute top-2 right-2 w-5 h-5 accent-theme-blue cursor-pointer z-10 opacity-0 group-hover:opacity-100 {isSelected(
+				ressource
+			)
+				? '!opacity-100'
+				: ''}"
 		/>
-		<span class="leading-[130%] text-2xl text-theme-white">
-			{ressource.title}
-		</span>
-	</button>
+		<button
+			onclick={() => (selectedRessource = ressource)}
+			class="flex flex-col items-center gap-4 w-full cursor-pointer"
+		>
+			<img
+				src={ressource.computedSvgUrl ?? ressource.image.url}
+				alt={ressource.image.alt}
+				class="w-full h-37 object-contain rounded-lg"
+			/>
+			<span class="leading-[130%] text-2xl text-theme-white">
+				{ressource.title}
+			</span>
+		</button>
+	</div>
 {/snippet}
 
 <div class="pt-24">
 	<section class="flex flex-col gap-16 px-16 py-24">
-		<h2 class="uppercase text-[150px] leading-[80%] text-theme-blue text-center">
-			Bonnes pratiques
-		</h2>
+		<h2 class="uppercase text-[150px] leading-[80%] text-theme-blue text-center">Signalétique</h2>
 		<div class="flex flex-col gap-24">
 			<div class="flex gap-4 justify-center">
 				<div class="flex rounded-5xl border border-white/20 overflow-hidden p-1">
@@ -278,13 +298,36 @@
 			</p>
 		</div>
 		<div class="flex gap-22">
-			<div class="flex-2 grid grid-cols-3 gap-8">
+			<div class="relative flex-2 grid grid-cols-3 gap-8">
 				{#if filteredRessources.length > 0}
 					{#each filteredRessources as ressource (ressource.id)}
 						{@render Ressource(ressource)}
 					{/each}
 				{:else}
 					<p class="text-theme-white/80">Aucune ressource.</p>
+				{/if}
+				{#if selectedRessources.length > 0}
+					<div
+						class="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-4 flex items-center gap-3 rounded-5xl border border-theme-blue/40"
+					>
+						<span
+							class="flex items-center justify-center h-8 w-8 rounded-full bg-theme-blue text-theme-black text-lg leading-[130%]"
+						>
+							{selectedRessources.length}
+						</span>
+						<span class="text-theme-white/75 leading-[150%]"
+							>{selectedRessources.length > 1 ? 'éléments sélectionnés' : 'élément sélectionné'}
+						</span>
+						<span class="w-px h-full bg-white/15"></span>
+						<button
+							onclick={downloadSelected}
+							disabled={selectedRessources.length === 0}
+							class="flex items-center gap-2 h-10 uppercase px-5 bg-theme-blue text-theme-black rounded-1.5xl cursor-pointer font-fledora leading-[140%] disabled:opacity-40 disabled:cursor-not-allowed"
+						>
+							<img src={downloadIcon} alt="Télécharger" class="h-3.75 w-3.75 object-contain" />
+							Télécharger
+						</button>
+					</div>
 				{/if}
 			</div>
 			<div class="flex-1 flex flex-col gap-8 text-theme-white">

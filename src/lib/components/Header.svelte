@@ -1,11 +1,15 @@
 <script lang="ts">
 	import oeilBlanc from '$lib/assets/oeil-blanc.svg';
+	import { page } from '$app/state';
 
-	let showEvalButton = $state(false);
+	let scrolled = $state(false);
 
 	const handleScroll = () => {
-		showEvalButton = window.scrollY >= window.innerHeight;
+		scrolled = window.scrollY >= window.innerHeight;
 	};
+
+	const isHomePage = $derived(page.url.pathname === '/');
+	const showEvalButton = $derived(!isHomePage || scrolled);
 </script>
 
 <svelte:window onscroll={handleScroll} />
@@ -34,16 +38,16 @@
 			</a>
 			<a
 				href="/mon-festival"
-				class="bg-[url('/src/lib/assets/button-festival.svg')] bg-no-repeat bg-center bg-contain transition-all duration-300"
+				class="bg-[url('/src/lib/assets/button-accessibilite-header.svg')] bg-no-repeat bg-center bg-contain transition-all duration-300"
 				class:w-0={!showEvalButton}
 				class:h-0={!showEvalButton}
 				class:px-0={!showEvalButton}
 				class:p-4={showEvalButton}
-				class:w-65={showEvalButton}
-				class:h-12={showEvalButton}
+				class:w-53={showEvalButton}
+				class:h-13={showEvalButton}
 				class:ml-4={showEvalButton}
 			>
-				<span class="sr-only">Évaluer mon festival</span>
+				<span class="sr-only">Découvrir mon niveau d'accessibilité</span>
 			</a>
 		</div>
 	</div>

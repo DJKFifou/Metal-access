@@ -14,7 +14,7 @@
 <section class="px-24 pt-45">
 	<div class="flex flex-col gap-6">
 		<div class="flex gap-1 *:leading-[130%] text-sm">
-			<a href="/" class="text-theme-blue">Bonnes pratiques</a>
+			<a href="/bonnes-pratiques" class="text-theme-blue">Bonnes pratiques</a>
 			<span class="text-theme-blue">-</span>
 			<p class="text-theme-white">Rendre son festival metal accessible à toutes et tous</p>
 		</div>
