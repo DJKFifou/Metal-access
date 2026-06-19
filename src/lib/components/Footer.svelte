@@ -12,25 +12,25 @@
 		<div class="flex gap-20">
 			<div class="flex flex-col gap-6">
 				<a
-					href=""
+					href="/"
 					class="flex items-center gap-10 border-b border-theme-white/50 w-fit leading-[150%] py-3"
 					>Accueil
 					<img src={arrowRight} alt="Arrow" class="h-5 object-contain" />
 				</a>
 				<a
-					href=""
+					href="/bonnes-pratiques"
 					class="flex items-center gap-10 border-b border-theme-white/50 w-fit leading-[150%] py-3"
 					>Bonnes pratiques
 					<img src={arrowRight} alt="Arrow" class="h-5 object-contain" />
 				</a>
 				<a
-					href=""
+					href="/handicaps"
 					class="flex items-center gap-10 border-b border-theme-white/50 w-fit leading-[150%] py-3"
 					>Les handicaps
 					<img src={arrowRight} alt="Arrow" class="h-5 object-contain" />
 				</a>
 				<a
-					href=""
+					href="/ressources"
 					class="flex items-center gap-10 border-b border-theme-white/50 w-fit leading-[150%] py-3"
 					>Signalétique
 					<img src={arrowRight} alt="Arrow" class="h-5 object-contain" />
@@ -38,19 +38,19 @@
 			</div>
 			<div class="flex flex-col gap-6">
 				<a
-					href=""
+					href="/federation"
 					class="flex items-center gap-10 border-b border-theme-white/50 w-fit leading-[150%] py-3"
 					>La fédération
 					<img src={arrowRight} alt="Arrow" class="h-5 object-contain" />
 				</a>
 				<a
-					href=""
+					href="/faire-mon-audit"
 					class="flex items-center gap-10 border-b border-theme-white/50 w-fit leading-[150%] py-3"
 					>Faire mon audit
 					<img src={arrowRight} alt="Arrow" class="h-5 object-contain" />
 				</a>
 				<a
-					href=""
+					href="/mon-festival"
 					class="flex items-center gap-10 border-b border-theme-white/50 w-fit leading-[150%] py-3"
 					>Découvrir mon niveau d’accessibilité
 					<img src={arrowRight} alt="Arrow" class="h-5 object-contain" />
@@ -58,4 +58,8 @@
 			</div>
 		</div>
 	</div>
+	<span
+		class="font-fledora uppercase text-theme-white/10 leading-none text-[218px] text-center overflow-hidden"
+		>Metal access</span
+	>
 </footer>
