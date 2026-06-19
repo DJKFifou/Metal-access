@@ -191,7 +191,7 @@
 					{/if}
 					{#if selectedRessources.length > 0}
 						<div
-							class="fixed bottom-4 left-1/2 -translate-x-1/2 px-6 py-4 flex items-center gap-3 rounded-5xl border border-theme-blue/40 bg-theme-black"
+							class="fixed z-10 bottom-4 left-1/2 -translate-x-1/2 px-6 py-4 flex items-center gap-3 rounded-5xl border border-theme-blue/40 bg-theme-black"
 						>
 							<span
 								class="flex items-center justify-center h-8 w-8 rounded-full bg-theme-blue text-theme-black text-lg leading-[130%]"
