@@ -22,7 +22,7 @@
 		>
 			<a href="/bonnes-pratiques">Bonnes pratiques</a>
 			<a href="/handicaps">Les handicaps</a>
-			<a href="/ressources">Ressources</a>
+			<a href="/signaletique">Signalétique</a>
 			<a href="/federation">La fédération</a>
 		</nav>
 		<div class="flex items-center gap-4">

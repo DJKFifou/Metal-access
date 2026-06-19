@@ -1,20 +1,188 @@
 <script lang="ts">
+	import { formatDate } from '$lib/index.js';
+
 	let { data } = $props();
-	console.log('data : ', data);
+
+	const pratiquesTags = data.allPages.map((page) => page.properties.Pratiques.multi_select).flat();
+	const uniquePratiquesTags = Array.from(new Set(pratiquesTags.map((tag) => tag.name))).map(
+		(name) => {
+			return pratiquesTags.find((tag) => tag.name === name);
+		}
+	);
+	const handicapsTags = data.allPages.map((page) => page.properties.Handicaps.multi_select).flat();
+	const uniqueHandicapsTags = Array.from(new Set(handicapsTags.map((tag) => tag.name))).map(
+		(name) => {
+			return handicapsTags.find((tag) => tag.name === name);
+		}
+	);
+
+	let selectedFilters = $state<string[]>([]);
+
+	let filteredPages = $derived(
+		selectedFilters.length === 0
+			? data.allPages
+			: data.allPages.filter((page) => {
+					const pageTags = [
+						...page.properties.Pratiques.multi_select,
+						...page.properties.Handicaps.multi_select
+					];
+					return pageTags.some((tag) => selectedFilters.includes(tag.name));
+				})
+	);
 </script>
 
-<section class="px-16 py-24">
-	<h2 class="uppercase text-[150px] leading-[80%] text-theme-blue text-center">Bonnes pratiques</h2>
-	<div>
-		<div>
-			<input type="radio" name="filter" id="filter1" value="filter1" />
+<div class="pt-24">
+	<section class="px-16 py-24">
+		<h2 class="uppercase text-[150px] leading-[80%] text-theme-blue text-center">
+			Bonnes pratiques
+		</h2>
+		<div class="flex flex-col gap-24">
+			<div class="flex gap-4 justify-center">
+				<div class="flex rounded-5xl border border-white/20 overflow-hidden p-1">
+					<div>
+						<input
+							type="radio"
+							name="filter"
+							id="filter_all"
+							value="all"
+							class="peer sr-only"
+							checked
+						/>
+						<label
+							for="filter_all"
+							class="px-4 py-2 bg-theme-black text-theme-white cursor-pointer peer-checked:bg-theme-blue peer-checked:text-theme-black rounded-5xl block"
+							>Tous</label
+						>
+					</div>
+					<div>
+						<input
+							type="radio"
+							name="filter"
+							id="filter2"
+							value="Bonnes pratiques"
+							class="peer sr-only"
+						/>
+						<label
+							for="filter2"
+							class="px-4 py-2 bg-theme-black text-theme-white cursor-pointer peer-checked:bg-theme-blue peer-checked:text-theme-black rounded-5xl block"
+							>Bonnes pratiques</label
+						>
+					</div>
+					<div>
+						<input
+							type="radio"
+							name="filter"
+							id="filter3"
+							value="Nouveautés"
+							class="peer sr-only"
+						/>
+						<label
+							for="filter3"
+							class="px-4 py-2 bg-theme-black text-theme-white cursor-pointer peer-checked:bg-theme-blue peer-checked:text-theme-black rounded-5xl block"
+							>Nouveautés</label
+						>
+					</div>
+				</div>
+				<input
+					type="text"
+					name="search"
+					id="search"
+					placeholder="Rechercher..."
+					class="text-white/70 px-4.5 bg-theme-black border border-white/20 rounded-4xl py-2"
+				/>
+			</div>
+			<div class="flex gap-10">
+				<div class="flex-2 grid grid-cols-2 gap-10">
+					{#each filteredPages as page (page.id)}
+						<a
+							href="/bonnes-pratiques/rendre-son-festival-metal-accessible-a-toutes-et-tous"
+							class="border border-theme-lightGrey rounded-xl px-2 pt-2 pb-10 flex flex-col gap-10"
+						>
+							{#if page.properties.image}
+								<img
+									src={page.properties.image[0].url}
+									alt={page.properties.Title.title[0].plain_text}
+									class="w-full h-auto object-cover rounded-lg"
+								/>
+							{:else}
+								<div class="w-full bg-theme-blue min-h-57.5 rounded-lg"></div>
+							{/if}
+							<div class="flex flex-col gap-10 px-6 h-full">
+								<div class="flex gap-2 flex-wrap">
+									{#each page.properties.Pratiques.multi_select as tag (tag.id)}
+										<span
+											class="bg-theme-darkGrey text-theme-white px-4 py-2 rounded-4xl text-sm leading-[150%] w-fit"
+											>{tag.name}</span
+										>
+									{/each}
+									{#each page.properties.Handicaps.multi_select as tag (tag.id)}
+										<span
+											class="bg-theme-darkGrey text-theme-white px-4 py-2 rounded-4xl text-sm leading-[150%] w-fit"
+											>{tag.name}</span
+										>
+									{/each}
+								</div>
+								<p class="text-white text-2xl leading-[130%] min-h-25 h-full">
+									{page.properties.Title.title[0].plain_text}
+								</p>
+								<span class="leading-[150%] text-theme-lightGrey"
+									>{formatDate(page.created_time)}</span
+								>
+							</div>
+						</a>
+					{/each}
+				</div>
+				<div class="flex-1 flex flex-col gap-10 text-theme-white">
+					<div class="flex flex-col gap-6">
+						<h3 class="text-4.5xl leading-none">Filtrer</h3>
+						<hr />
+					</div>
+					<div class="flex flex-col gap-10">
+						<div class="flex flex-col gap-4">
+							<span class="text-lg font-semibold leading-[130%]">Pratiques</span>
+							<div class="px-4">
+								{#each uniquePratiquesTags as tag, i (i)}
+									<div class="flex items-center gap-4 py-2 px-4">
+										<input
+											type="checkbox"
+											id={`pratique-${tag.name}`}
+											value={tag.name}
+											bind:group={selectedFilters}
+										/>
+										<label
+											for={`pratique-${tag.name}`}
+											class="text-lg leading-[130%] text-theme-white cursor-pointer"
+										>
+											{tag.name}
+										</label>
+									</div>
+								{/each}
+							</div>
+						</div>
+						<div class="flex flex-col gap-4">
+							<span class="text-lg font-semibold leading-[130%]">Handicaps</span>
+							<div class="px-4">
+								{#each uniqueHandicapsTags as tag, i (i)}
+									<div class="flex items-center gap-4 py-2 px-4">
+										<input
+											type="checkbox"
+											id={`handicap-${tag.name}`}
+											value={tag.name}
+											bind:group={selectedFilters}
+										/>
+										<label
+											for={`handicap-${tag.name}`}
+											class="text-lg leading-[130%] text-theme-white cursor-pointer"
+										>
+											{tag.name}
+										</label>
+									</div>
+								{/each}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div></div>
-	</div>
-</section>
-
-{#each data.allPages as page (page.id)}
-	<div>
-		<p>{page.properties.Title.title[0].plain_text}</p>
-	</div>
-{/each}
+	</section>
+</div>
