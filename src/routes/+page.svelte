@@ -5,6 +5,7 @@
 	import Signaletiques from '$lib/components/Homepage/Signaletiques.svelte';
 	import SliderHandicap from '$lib/components/Homepage/SliderHandicap.svelte';
 	// import Loader from '$lib/components/Loader.svelte';
+	import Deploiement from '$lib/components/Homepage/Deploiement.svelte';
 </script>
 
 <!-- <Loader /> -->
@@ -14,3 +15,4 @@
 <BonnesPratiques />
 <Signaletiques />
 <SliderHandicap />
+<Deploiement />
