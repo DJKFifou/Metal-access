@@ -37,6 +37,7 @@
 	},
 	"dependencies": {
 		"@notionhq/client": "^5.22.0",
+		"@rive-app/canvas": "^2.38.1",
 		"swiper": "^12.2.0"
 	}
 }
