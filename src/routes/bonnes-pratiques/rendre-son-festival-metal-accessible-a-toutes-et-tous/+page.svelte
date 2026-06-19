@@ -68,15 +68,21 @@
 				<div>
 					<div class="flex gap-4 items-center">
 						<span class="w-5 h-5 rounded bg-theme-blue"></span>
-						<p>Moteur - cheminements, plateformes PMR, sanitaires adaptés</p>
+						<p class="text-theme-blue leading-[150%]">
+							Moteur - cheminements, plateformes PMR, sanitaires adaptés
+						</p>
 					</div>
 					<div class="flex gap-4 items-center">
 						<span class="w-5 h-5 rounded bg-theme-blue"></span>
-						<p>Auditif - boucles magnétiques, LSF, gilets vibrants</p>
+						<p class="text-theme-blue leading-[150%]">
+							Auditif - boucles magnétiques, LSF, gilets vibrants
+						</p>
 					</div>
 					<div class="flex gap-4 items-center">
 						<span class="w-5 h-5 rounded bg-theme-blue"></span>
-						<p>Visuel - contraste, audio-description, chiens guides admis</p>
+						<p class="text-theme-blue leading-[150%]">
+							Visuel - contraste, audio-description, chiens guides admis
+						</p>
 					</div>
 				</div>
 			</div>
