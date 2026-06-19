@@ -31,13 +31,9 @@
 				<div class="flex flex-col gap-6">
 					<div class="flex gap-6 overflow-auto">
 						{#each selectedRessource.properties.utilisation as item, i (i)}
-							<div class="flex items-center gap-4">
-								<img
-									src={item.image.url}
-									alt={item.image.alt}
-									class="h-12 object-contain rounded-lg"
-								/>
+							<div class="flex flex-col gap-4 py-6 px-8 rounded-xl border border-theme-darkBlue">
 								<span class="text-theme-white text-xl">{item.name}</span>
+								<img src={item.image.url} alt={item.image.alt} class="w-full object-contain" />
 							</div>
 						{/each}
 					</div>
