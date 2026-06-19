@@ -67,18 +67,15 @@
 							{/if}
 							<div class="flex flex-col gap-10 px-6 h-full">
 								<div class="flex gap-2 flex-wrap">
-									{#each page.properties.Pratiques.multi_select as tag (tag.id)}
+									{#each [...page.properties.Pratiques.multi_select, ...page.properties.Handicaps.multi_select].slice(0, 2) as tag (tag.id)}
 										<span
 											class="bg-theme-darkGrey text-theme-white px-4 py-2 rounded-4xl text-sm leading-[150%] w-fit"
 											>{tag.name}</span
 										>
 									{/each}
-									{#each page.properties.Handicaps.multi_select as tag (tag.id)}
-										<span
-											class="bg-theme-darkGrey text-theme-white px-4 py-2 rounded-4xl text-sm leading-[150%] w-fit"
-											>{tag.name}</span
-										>
-									{/each}
+									{#if [...page.properties.Pratiques.multi_select, ...page.properties.Handicaps.multi_select].length > 2}
+										<span class="bg-theme-darkGrey text-theme-white/50 px-4 py-2 rounded-4xl text-sm leading-[150%] w-fit">+{[...page.properties.Pratiques.multi_select, ...page.properties.Handicaps.multi_select].length - 2}</span>
+									{/if}
 								</div>
 								<p class="text-white text-2xl leading-[130%] min-h-25 h-full">
 									{page.properties.Title.title[0].plain_text}
